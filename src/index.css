@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+
+@layer base {
+    html {
+        @apply bg-black/* Default background for smaller screens */
+    }
+    
+}
