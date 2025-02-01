@@ -1,25 +1,34 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 function Register() {
+  // State to store form data
   const [formData, setFormData] = useState({
-    field1: "",
-    field2: "",
-    field3: "",
-    field4: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   });
 
+  // Handle form input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = async () => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
+      // Send POST request to the backend
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData), // Sending the form data
       });
 
       if (!response.ok) {
@@ -27,51 +36,51 @@ function Register() {
       }
 
       const result = await response.json();
-      console.log("Success:", result);
+      console.log("Registration Success:", result);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   return (
-    <div className="text-white text-lg text-center leading-snug container mt-12 px-12 font-jetbrains">
-      <div className="w-full grid grid-cols-1 place-items-center gap-y-4">
+    <div className="text-white text-lg text-center leading-snug container mt-12 overflow-visible px-12 font-jetbrains">
+      <div className="w-full overflow-visible grid grid-cols-1 place-items-center gap-y-10">
         <input
           type="text"
-          name="field1"
-          value={formData.field1}
-          onChange={handleChange}
           className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-          placeholder="Enter text"
+          placeholder="Username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
         />
         <input
-          type="text"
-          name="field2"
-          value={formData.field2}
-          onChange={handleChange}
+          type="email"
           className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-          placeholder="Enter text"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
         />
         <input
-          type="text"
-          name="field3"
-          value={formData.field3}
-          onChange={handleChange}
+          type="password"
           className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-          placeholder="Enter text"
+          placeholder="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
         />
         <input
-          type="text"
-          name="field4"
-          value={formData.field4}
-          onChange={handleChange}
+          type="password"
           className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-          placeholder="Enter text"
+          placeholder="Confirm Password"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
         />
-
+        
         <button
-          className="cursor-pointer p-4 bg-blue-500 rounded-md px-8"
           onClick={handleSubmit}
+          className="cursor-pointer p-4 bg-blue-500 rounded-md px-8"
         >
           Submit
         </button>
