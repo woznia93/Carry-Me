@@ -66,7 +66,7 @@ npm start
 MongoDB Setup
 Ensure MongoDB is running locally or use a cloud instance (e.g., MongoDB Atlas). Update the .env file with your MongoDB URI.
 
-Future Improvements
+### Future Improvements
 More advanced matchmaking algorithms
 Performance-based Elo adjustments
 Seasonal leaderboards and rewards
