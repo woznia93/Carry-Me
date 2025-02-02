@@ -62,7 +62,7 @@ python app.py
 cd frontend
 npm install
 npm start
-''''
+'''
 MongoDB Setup
 Ensure MongoDB is running locally or use a cloud instance (e.g., MongoDB Atlas). Update the .env file with your MongoDB URI.
 
