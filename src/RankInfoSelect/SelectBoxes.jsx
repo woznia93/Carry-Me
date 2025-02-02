@@ -26,8 +26,6 @@ function SelectBoxes() {
 
     const handleSelect = async () => {
 
-      console.log("aaa")
-      console.log(formData)
       const url = "http://localhost:5000/SelectBoxes"
   
       try {
