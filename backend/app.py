@@ -82,6 +82,23 @@ def update_user():
         return jsonify({"message": "Error updating user", "error": str(e)}), 500
 
 
+@app.route('/getuserbyrank', methods=['GET'])
+def get_user_by_rank():
+    try:
+        data = request.get_json()
+        rank = data.get("rank")
+        if not rank:
+            return jsonify({"message": "Rank parameter is required"}), 400
+        
+        users = list(collection.find({"rank": rank}, {"_id": 0}))  # Exclude '_id' field from response
+        
+        if not users:
+            return jsonify({"message": "No users found with the specified rank."}), 404
+        
+        return jsonify({"message": "Users retrieved successfully", "data": users}), 200
+    except Exception as e:
+        return jsonify({"message": "Error fetching users", "error": str(e)}), 500
+
 
 
 if __name__ == '__main__':
