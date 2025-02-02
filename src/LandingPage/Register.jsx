@@ -9,6 +9,9 @@ function AuthForm() {
     email: "",
     password: "",
     confirmPassword: "",
+    id: "",
+    discord: "",
+    rank: "",
   });
 
   const [isLogin, setIsLogin] = useState(false);
