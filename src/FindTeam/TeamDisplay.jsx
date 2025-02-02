@@ -13,12 +13,32 @@ function TeamDisplay() {
   useEffect(() => {
     const fetchUsersByRank = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/getuserbyrank?rank=${rank}`);
+        const response = await fetch(
+          `http://localhost:5000/getuserbyrank?rank=${rank}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
         const data = await response.json();
-        setUsers(data.data || []);
+        const usersData = data.data || [];
+
+        if (usersData.length > 5) {
+          // Select 5 random users if there are more than 5
+          const randomUsers = [];
+          const usedIndices = new Set();
+          
+          while (randomUsers.length < 5) {
+            const randomIndex = Math.floor(Math.random() * usersData.length);
+            if (!usedIndices.has(randomIndex)) {
+              randomUsers.push(usersData[randomIndex]);
+              usedIndices.add(randomIndex);
+            }
+          }
+
+          setUsers(randomUsers);
+        } else {
+          setUsers(usersData);
+        }
       } catch (error) {
         console.error("Error fetching users:", error);
       } finally {
@@ -40,8 +60,8 @@ function TeamDisplay() {
         ) : users.length > 0 ? (
           <ul className="text-white mt-4">
             {users.map((user, index) => (
-              <li key={index} className="text-2xl">
-                {user.username} - {user.rank}
+              <li key={index} className="text-2xl p-4">
+                {user.username} - {user.rank} - {user.id} - {user.discord}
               </li>
             ))}
           </ul>
