@@ -152,5 +152,27 @@ def update_game_result():
     except Exception as e:
         return jsonify({"message": "Error updating game result", "error": str(e)}), 500
 
+@app.route('/leaderboard', methods=['GET'])
+def leaderboard():
+    try:
+        # Define the ranks to exclude
+        excluded_ranks = ["Iron", "Bronze", "Silver", "Gold"]
+        
+        # Fetch all users from the database, excluding those with the specified ranks and invalid Elo
+        users = list(collection.find({
+            "rank": {"$nin": excluded_ranks},  # Exclude users with ranks Iron, Bronze, Silver, or Gold
+            "elo": {"$ne": -1, "$ne": ""}    # Exclude users with Elo equal to -1 or an empty string
+        }, {"_id": 0, "username": 1, "elo": 1}))  # Only select 'username' and 'elo' fields
+
+        if not users:
+            return jsonify({"message": "No valid users found."}), 404
+
+        # Return the list of users with their Elo ratings
+        return jsonify({"message": "Leaderboard fetched successfully", "data": users}), 200
+    
+    except Exception as e:
+        return jsonify({"message": "Error fetching leaderboard", "error": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True)
