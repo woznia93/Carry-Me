@@ -60,7 +60,7 @@ function TeamDisplay() {
         ) : users.length > 0 ? (
           <ul className="text-white mt-4">
             {users.map((user, index) => (
-              <li key={index} className="text-2xl p-4">
+              <li key={index} className="text-2xl font-bold border-2 border-purple-600 p-4">
                 {user.username} - {user.rank} - {user.id} - {user.discord}
               </li>
             ))}

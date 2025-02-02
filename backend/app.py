@@ -99,6 +99,58 @@ def get_user_by_rank():
         return jsonify({"message": "Error fetching users", "error": str(e)}), 500
 
 
+@app.route('/gameresult', methods=['GET'])
+def update_game_result():
+
+    smt = {
+        "Iron": 1,
+        "Bronze": 2,
+        "Silver": 3,
+        "Gold": 4,
+        "Platinum": 5,
+        "Diamond": 6,
+        "Ascended": 7,
+        "Immortal": 8,
+        "Radiant": 9
+    }
+
+    
+
+    try:
+        result = request.args.get("result")
+        user = request.args.get("user")
+        otherrank = request.args.get("rank")
+
+        if not result or not user:
+            return jsonify({"message": "Both 'result' and 'user' parameters are required"}), 400
+
+        if result not in ["win", "loss"]:
+            return jsonify({"message": "Invalid result. It must be either 'win' or 'loss'."}), 400
+
+        # Fetch the user from the database
+        user_data = collection.find_one({"username": user})
+
+        if not user_data:
+            return jsonify({"message": f"User '{user}' not found."}), 404
+        
+        # Get the current Elo rating (assuming it exists; if not, set it to 0)
+        current_elo = user_data.get("elo", 0)
+        current_rank = user_data.get("rank")
+        
+        val = (smt.get(current_rank) - smt.get(otherrank)) * 30
+        # Update Elo based on the result
+        new_elo = current_elo + val if result == "win" else current_elo - val
+
+        # Update the user's Elo rating in the database
+        collection.update_one(
+            {"username": user},
+            {"$set": {"elo": new_elo}}
+        )
+
+        return jsonify({"message": f"User '{user}' Elo updated successfully!", "new_elo": new_elo}), 200
+
+    except Exception as e:
+        return jsonify({"message": "Error updating game result", "error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
