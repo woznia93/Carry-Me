@@ -48,7 +48,7 @@ function SelectBoxes() {
         if(!formData.rank || formData.rank === "Iron" || formData.rank === "Bronze" || formData.rank === "Silver" || formData.rank === "Gold")
           navigate(`/badrank`);
         else
-          navigate(`/badrank/${user}`)
+          navigate(`/goodrank/${user}`)
 
       } catch (error) {
         console.error("Error:", error);
