@@ -22,12 +22,12 @@ function TeamDisplay() {
         const data = await response.json();
         const usersData = data.data || [];
 
-        if (usersData.length > 5) {
+        if (usersData.length > 4) {
           // Select 5 random users if there are more than 5
           const randomUsers = [];
           const usedIndices = new Set();
           
-          while (randomUsers.length < 5) {
+          while (randomUsers.length < 4) {
             const randomIndex = Math.floor(Math.random() * usersData.length);
             if (!usedIndices.has(randomIndex)) {
               randomUsers.push(usersData[randomIndex]);
