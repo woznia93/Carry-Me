@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 function SelectBoxes() {
 
-    const { username } = useParams();
+    const { user } = useParams();
 
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
       id: "",
       discord: "",
-      rank: "",
-      username: username
+      rank: "Iron",
+      username: user
     });
 
     const handleChange = (e) => {
@@ -26,7 +26,6 @@ function SelectBoxes() {
 
     const handleSelect = async () => {
 
-  
       console.log("aaa")
       console.log(formData)
       const url = "http://localhost:5000/SelectBoxes"
