@@ -63,7 +63,7 @@ function SelectBoxes() {
       <>
 
             <h3 className='text-4xl text-center font-bold text-white overflow-visible py-4 px-4 mt-4'>
-            ID:
+            Riot ID:
             </h3>
             <input
               type="text"
@@ -72,7 +72,7 @@ function SelectBoxes() {
               onChange={handleChange}
 
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-              placeholder="Enter ID"
+              placeholder="example#1234"
             />
             <h3 className='text-4xl text-center font-bold text-white overflow-visible py-4 px-4 mt-4'>
             Discord:
@@ -84,7 +84,7 @@ function SelectBoxes() {
               onChange={handleChange}
 
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-              placeholder="Enter Discord"
+              placeholder="@handle"
             />
             <h3 className='text-4xl text-center font-bold text-white overflow-visible py-4 px-4 mt-4'>
             Rank:
