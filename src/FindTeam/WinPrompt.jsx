@@ -1,7 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function WinPrompt() {
+
+
+    const navigate = useNavigate();
 
     const {user, rank} = useParams()
 
@@ -22,6 +26,7 @@ function WinPrompt() {
             // Handle success (e.g., update UI or notify the user)
             console.log(data.message);
             console.log("New Elo:", data.new_elo);
+            navigate(`/goodrank/${user}`)
           } else {
             // Handle error response
             console.error(data.message || "Error occurred while updating the game result");

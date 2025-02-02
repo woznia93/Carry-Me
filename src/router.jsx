@@ -5,6 +5,7 @@ import RankInfoSelect from './RankInfoSelect/RankInfoSelect';
 import BotScreen from './BotScreen/BotScreen';
 import GoodScreen from './GoodScreen/GoodScreen';
 import FindTeam from './FindTeam/FindTeam';
+import Leaderboard from './Leaderboard/Leaderboard';
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
         <Route path="/badrank" element={<BotScreen/>}/>
         <Route path="/goodrank/:user" element={<GoodScreen/>}/>
         <Route path="/findteam/:user/:rank" element={<FindTeam/>}/>
+        <Route path="/leaderboard" element={<Leaderboard/>}/>
       </Routes>
     </Router>
   );
