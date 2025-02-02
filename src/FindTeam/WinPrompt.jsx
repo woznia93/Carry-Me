@@ -40,13 +40,13 @@ function WinPrompt() {
       <div className="mt-6 grid grid-cols-2 place-items-center gap-8 MT-12">
         <button
           className="cursor-pointer p-4 bg-green-500 rounded-md px-8 w-40"
-          onClick={handle("win")}
+          onClick={() => handle("win")}
         >
           Win
         </button>
         <button
           className="cursor-pointer p-4 bg-red-500 rounded-md px-8 w-40"
-          onClick={handle("loss")}
+          onClick={() => handle("loss")}
         >
           Loss
         </button>
