@@ -6,7 +6,7 @@ import Register from "./LandingPage/Register"
 function App() {
 
   return (
-      <div className='container'>
+      <div className=''>
         <MainHeader/>
         <BriefInfo/>
         <Register/>

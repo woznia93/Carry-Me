@@ -1,12 +1,19 @@
 
+import SelectPrompt from "./SelectPromt"
+import SelectBoxes from "./SelectBoxes"
+import SelectRank from "./SelectRank"
 
 function RankInfoSelect() {
 
   return (
-      <div className='container'>
-            <div className="text-white">tesaitnintint</div>
-        <div className="h-32"></div>
-      </div>
+    <div className="w-[100%] grid-cols-1 grid place-items-center">
+        
+            <div className="p-6 mt-20 rounded-xl border-2 border-green-400 grid grid-cols-1 place-items-center">
+                <SelectPrompt/>
+                <SelectBoxes/>
+            </div>
+        
+    </div>
   )
 }
 
