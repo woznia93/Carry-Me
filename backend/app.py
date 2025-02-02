@@ -85,8 +85,7 @@ def update_user():
 @app.route('/getuserbyrank', methods=['GET'])
 def get_user_by_rank():
     try:
-        data = request.get_json()
-        rank = data.get("rank")
+        rank = request.args.get("rank")
         if not rank:
             return jsonify({"message": "Rank parameter is required"}), 400
         
