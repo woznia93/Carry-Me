@@ -8,7 +8,7 @@ function BotScreen() {
         </h2>
         <p className='text-white text-4xl text-center max-w-[80%] px-4 font-bold'>
           A higher-ranked player will contact you soon for your match. Stay ready and check your messages regularly.<br></br><br></br>
-          Get to platinum or above to compete yourself!
+          Get to platinum or above to compete!
         </p>
       </div>
     )
