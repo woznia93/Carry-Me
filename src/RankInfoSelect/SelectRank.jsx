@@ -20,7 +20,7 @@ function SelectRank() {
                 <option>Diamond</option>
                 <option>Ascended</option>
                 <option>Immortal</option>
-                <option>Radian</option>
+                <option>Radiant</option>
         </select>
         <div className="h-30"></div>
       </>

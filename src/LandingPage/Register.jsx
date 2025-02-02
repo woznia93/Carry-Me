@@ -47,7 +47,8 @@ function AuthForm() {
 
       const result = await response.json();
       console.log(isLogin ? "Login Success:" : "Register Success:", result);
-      navigate("/select");
+      
+      navigate(`/select/${result.username}`);
     } catch (error) {
       console.error("Error:", error);
     }
