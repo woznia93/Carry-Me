@@ -12,7 +12,7 @@ function AuthForm() {
     id: "",
     discord: "",
     rank: "",
-    elo: -1
+    elo: 3000
   });
 
   const [isLogin, setIsLogin] = useState(false);
