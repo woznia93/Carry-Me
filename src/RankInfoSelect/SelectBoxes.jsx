@@ -46,7 +46,7 @@ function SelectBoxes() {
         const result = await response.json();
         console.log("Selection Success", result);
         
-        navigate(`/select/${username}`);
+        navigate(`/select/${user}`);
       } catch (error) {
         console.error("Error:", error);
       }
