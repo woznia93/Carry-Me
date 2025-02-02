@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function AuthForm() {
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
-  const [isLogin, setIsLogin] = useState(false); // State to toggle between login and register
+
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,7 +21,14 @@ function AuthForm() {
   };
 
   const handleSubmit = async () => {
+    // Basic validation for passwords matching during registration
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      console.error("Passwords do not match");
+      return; // Stop the form submission if passwords don't match
+    }
+
     const url = isLogin ? "http://localhost:5000/login" : "http://localhost:5000/register";
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -38,12 +44,10 @@ function AuthForm() {
 
       const result = await response.json();
       console.log(isLogin ? "Login Success:" : "Register Success:", result);
+      navigate("/select");
     } catch (error) {
       console.error("Error:", error);
     }
-
-    navigate("/select")
-
   };
 
   return (
@@ -54,16 +58,16 @@ function AuthForm() {
           <div className="w-full grid grid-cols-1 place-items-center gap-y-4">
             <input
               type="text"
-              name="field1"
-              value={formData.field1}
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter username"
             />
             <input
               type="password"
-              name="field2"
-              value={formData.field2}
+              name="password"
+              value={formData.password}
               onChange={handleChange}
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter password"
@@ -79,32 +83,32 @@ function AuthForm() {
           <div className="w-full grid grid-cols-1 place-items-center gap-y-4">
             <input
               type="text"
-              name="field1"
-              value={formData.field1}
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter username"
             />
             <input
               type="email"
-              name="field2"
-              value={formData.field2}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter email"
             />
             <input
               type="password"
-              name="field3"
-              value={formData.field3}
+              name="password"
+              value={formData.password}
               onChange={handleChange}
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter password"
             />
             <input
               type="password"
-              name="field4"
-              value={formData.field4}
+              name="confirmPassword"
+              value={formData.confirmPassword}
               onChange={handleChange}
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Confirm password"
