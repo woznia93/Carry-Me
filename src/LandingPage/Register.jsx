@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AuthForm() {
+
+  const navigate = useNavigate()
+
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -36,6 +41,9 @@ function AuthForm() {
     } catch (error) {
       console.error("Error:", error);
     }
+
+    navigate("/select")
+
   };
 
   return (
