@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
-app = Flask(__name__)  # ✅ Define 'app' before using it
+app = Flask(__name__)  # Define 'app' before using it
 CORS(app)
 
 # Fetch MongoDB URI from environment variable
@@ -56,6 +56,32 @@ def login():
     
     except Exception as e: 
         return jsonify({"message": "Error occurred", "error": str(e)}), 500
+
+@app.route('/SelectBoxes', methods=['POST'])
+def update_user():
+    try:
+        data = request.get_json()
+        username = data.get("username")  # Find user by username
+        update_fields = {key: value for key, value in data.items() if key != "username"}
+
+        if not update_fields:
+            return jsonify({"message": "No fields to update"}), 400
+
+        result = collection.update_one(
+            {"username": username},
+            {"$set": update_fields}
+        )
+
+        if result.modified_count > 0:
+            return jsonify({"message": "User updated successfully"}), 200
+        else:
+            return jsonify({"message": "User not found or no update needed"}), 404
+
+    except Exception as e:
+        return jsonify({"message": "Error updating user", "error": str(e)}), 500
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
