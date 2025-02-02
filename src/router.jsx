@@ -8,7 +8,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<App/>} />
-        <Route path="/select" element={<RankInfoSelect/>}/>
+        <Route path="/select/:user" element={<RankInfoSelect/>}/>
       </Routes>
     </Router>
   );
