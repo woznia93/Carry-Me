@@ -42,8 +42,9 @@ def register():
 def login():
     try:
         data = request.get_json()
-        user = collection.find_one({"$or": [{"username": data["username"]}, {"email": data["email"]}]})
-        
+        user = collection.find_one({"$or": [{"username": data["username"]}]})
+        print(user["password"])
+        print(data["password"])
         if not user:
             return jsonify({"message": "User not found."}), 404
         
@@ -69,7 +70,7 @@ def update_user():
 
         result = collection.update_one(
             {"username": username},
-            {"$set": update_fields}
+            {"$set": update_fields},
         )
 
         if result.modified_count > 0:
