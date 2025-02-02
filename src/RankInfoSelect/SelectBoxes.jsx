@@ -45,8 +45,11 @@ function SelectBoxes() {
   
         const result = await response.json();
         console.log("Selection Success", result);
-        
-        navigate(`/select/${user}`);
+        if(!formData.rank || formData.rank === "Iron" || formData.rank === "Bronze" || formData.rank === "Silver" || formData.rank === "Gold")
+          navigate(`/badrank`);
+        else
+          navigate(`/badrank/${user}`)
+
       } catch (error) {
         console.error("Error:", error);
       }
