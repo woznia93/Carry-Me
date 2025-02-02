@@ -1,9 +1,19 @@
 import { useParams } from "react-router-dom"
 import React, {useState} from "react"
+import { useNavigate } from "react-router-dom";
 
 function SelectBoxes() {
 
     const { username } = useParams();
+
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+      id: "",
+      discord: "",
+      rank: "",
+      username: username
+    });
 
     const handleChange = (e) => {
       setFormData({
@@ -12,17 +22,13 @@ function SelectBoxes() {
       });
     };
 
-    const [formData, setFormData] = useState({
-        id: "",
-        discord: "",
-        rank: "",
-        username: username
-    });
     
 
     const handleSelect = async () => {
 
   
+      console.log("aaa")
+      console.log(formData)
       const url = "http://localhost:5000/SelectBoxes"
   
       try {
