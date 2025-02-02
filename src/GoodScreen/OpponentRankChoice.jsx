@@ -11,7 +11,7 @@ function OpponentRankChoice() {
 
 
     const handleFindTeam = () => {
-        navigate(`/findteam/${user}/${selectedRank.toLowerCase()}`)
+        navigate(`/findteam/${user}/${selectedRank}`)
     }
 
     return (
