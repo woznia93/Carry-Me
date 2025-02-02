@@ -1,5 +1,55 @@
+import { useParams } from "react-router-dom"
+import React, {useState} from "react"
 
 function SelectBoxes() {
+
+    const { username } = useParams();
+
+    const handleChange = (e) => {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    };
+
+    const [formData, setFormData] = useState({
+        id: "",
+        discord: "",
+        rank: "",
+        username: username
+    });
+    
+
+    const handleSelect = async () => {
+
+  
+      const url = "http://localhost:5000/SelectBoxes"
+  
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData), // Sending the form data
+        });
+  
+        if (!response.ok) {
+          throw new Error("Failed to set user profile");
+        }
+  
+        const result = await response.json();
+        console.log("Selection Success", result);
+        
+        navigate(`/select/${username}`);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    
+
+    
+
 
     return (
       <>
@@ -8,8 +58,11 @@ function SelectBoxes() {
             ID:
             </h3>
             <input
-              type="ID"
-              name="field1"
+              type="text"
+              name="id"
+              value={formData.id}
+              onChange={handleChange}
+
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter ID"
             />
@@ -17,8 +70,11 @@ function SelectBoxes() {
             Discord:
             </h3>
             <input
-              type="Discord"
-              name="field2"
+              type="text"
+              name="discord"
+              value={formData.discord}
+              onChange={handleChange}
+
               className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
               placeholder="Enter Discord"
             />
@@ -26,8 +82,11 @@ function SelectBoxes() {
             Rank:
             </h3>
             <select
-                type="ID"
-                name="field1"
+                type="selector"
+                name="rank"
+                value={formData.rank}
+                onChange={handleChange}
+
                 className="bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64 overflow-y-auto"
                 placeholder="Enter ID">
                     <option>Iron</option>
@@ -42,7 +101,8 @@ function SelectBoxes() {
             </select>
         
             <button
-              className="cursor-pointer p-4 bg-blue-500 rounded-md px-8 mt-12 text-white">
+              className="cursor-pointer p-4 bg-blue-500 rounded-md px-8 mt-12 text-white"
+              onClick={handleSelect}>
               Continue
             </button>
 
