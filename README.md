@@ -54,15 +54,15 @@ The ranking system follows a similar structure to **Valorant**:
 ```bash
 cd backend
 pip install -r requirements.txt
-python app.py 
+python app.py
 '''
 
 ## Frontend Setup (React)
 ```bash
 cd frontend
 npm install
-npm start
-'''
+npm start```
+
 MongoDB Setup
 Ensure MongoDB is running locally or use a cloud instance (e.g., MongoDB Atlas). Update the .env file with your MongoDB URI.
 
